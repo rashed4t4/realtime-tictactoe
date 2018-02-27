@@ -4,6 +4,7 @@
 <head>
   <title>Tic Tac Toe</title>
   <link rel="stylesheet" href="tictactoe.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="tictactoe.js"></script>
 </head>
 
@@ -18,8 +19,8 @@
       <span class="markLabel">X</span>
       <span class="markLabel">O</span>
       <br/>
-      <div class="times">Won <span class="one_times">0</span> <span class="two_times">0</span> times</div>
-      <div class="times">Lost <span class="one_times">0</span> <span class="two_times">0</span> times</div>
+      <div class="times">Won <span class="one_times" id="one_won">0</span>   <span class="two_times" id="two_won">0</span> times</div>
+      <div class="times">Lost <span class="one_times" id="one_lost">0</span>   <span class="two_times" id="two_lost">0</span> times</div>
       <br/>
       <div class="statusDiv borderBottom">Game Status</div>
       <p>New Game</p>
@@ -30,19 +31,19 @@
       <table class="ticTable">
         <tbody>
           <tr>
-            <td id="0" class="borderBottom borderRight"></td>
-            <td id="1" class="borderBottom borderRight"></td>
-            <td id="2" class="borderBottom"></td>
+            <td data-i=0 data-j=0 id="0" class="borderBottom borderRight"></td>
+            <td data-i=0 data-j=1 id="1" class="borderBottom borderRight"></td>
+            <td data-i=0 data-j=2 id="2" class="borderBottom"></td>
           </tr>
           <tr>
-            <td id="3" class="borderBottom borderRight"></td>
-            <td id="4" class="borderBottom borderRight"></td>
-            <td id="5" class="borderBottom"></td>
+            <td data-i=1 data-j=0 id="3" class="borderBottom borderRight"></td>
+            <td data-i=1 data-j=1 id="4" class="borderBottom borderRight"></td>
+            <td data-i=1 data-j=2 id="5" class="borderBottom"></td>
           </tr>
           <tr>
-            <td id="6" class="borderRight"></td>
-            <td id="7" class="borderRight"></td>
-            <td id="8"></td>
+            <td data-i=2 data-j=0 id="6" class="borderRight"></td>
+            <td data-i=2 data-j=1 id="7" class="borderRight"></td>
+            <td data-i=2 data-j=2 id="8"></td>
           </tr>
         </tbody>
       </table>
