@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tic Tac Toe</title>
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+</head>
+
+<body>
+    <div id="startOlay" class="overlay">
+
+       
+        <!-- Overlay content -->
+        <div class="overlay-content">
+            <table>
+              <tr>
+                <td></td>
+              </tr>
+            </table>
+            <input id="name" type="text" placeholder="Name"/>
+            
+            <button id="play">Play</button></br></br>
+            <h4 id='waiting' class='text-white'></h4>
+        </div>
+
+    </div>  
+  <div class="container">
+    <h2>Tic Tac Toe</h2>
+    <hr></hr>
+    <div class="controls">
+      <span class="borderBottom" id='p1'>Player One</span>
+      <span class="borderBottom" id='p2'>Player Two</span>
+      <br/>
+      <span class="markLabel">X</span>
+      <span class="markLabel">O</span>
+      <br/>
+      <div class="times">Won <span class="one_times" id="one_won">0</span>   <span class="two_times" id="two_won">0</span> times</div>
+      <div class="times">Lost <span class="one_times" id="one_lost">0</span>   <span class="two_times" id="two_lost">0</span> times</div>
+      <br/>
+      <div class="statusDiv borderBottom">Game Status</div>
+      <p id='status'></p>
+      <!-- Game Status Messages: Game in progress | Player 1 wins | Player 2 wins -->
+      <button id='restart'>Restart</button>
+    </div>
+    <div class="board">
+      <table class="ticTable">
+        <tbody>
+          <tr>
+            <td data-i=0 data-j=0 id="b00" class="borderBottom borderRight"></td>
+            <td data-i=0 data-j=1 id="b01" class="borderBottom borderRight"></td>
+            <td data-i=0 data-j=2 id="b02" class="borderBottom"></td>
+          </tr>
+          <tr>
+            <td data-i=1 data-j=0 id="b10" class="borderBottom borderRight"></td>
+            <td data-i=1 data-j=1 id="b11" class="borderBottom borderRight"></td>
+            <td data-i=1 data-j=2 id="b12" class="borderBottom"></td>
+          </tr>
+          <tr>
+            <td data-i=2 data-j=0 id="b20" class="borderRight"></td>
+            <td data-i=2 data-j=1 id="b21" class="borderRight"></td>
+            <td data-i=2 data-j=2 id="b22"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <link rel="stylesheet" type="text/css" href="/css/game.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script  src="/js/game.js"></script>
+</body>
+</html>
