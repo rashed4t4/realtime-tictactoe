@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
   var socket = io();
-  var name, roomNo, currentPlayer, players, opponent;
+  var name, currentPlayer, players ;
   
   
   var board = [
@@ -145,7 +145,7 @@ $(document).ready(function(){
     else{
       $('#waiting').html("Waiting for player . . .");
     
-      socket.emit('setName', name, roomNo); 
+      socket.emit('joinroom', name); 
     }
   })
   
@@ -155,11 +155,23 @@ $(document).ready(function(){
       const c = $(this).data('j');
       
       if(name == players[currentPlayer].name && $(this).text()==""){
-        socket.emit('turn', roomNo, r, c, currentPlayer);
+        $(this).html(players[currentPlayer].tocken)
+        socket.emit('turn', players[0].roomNo, r, c);
       }
       
   })
   
+  $("#playAgain").click(function(event){
+    $(this).css("background","grey");
+    $('#status').html("Waiting for player . . .");
+    socket.emit('playAgain', players, name);
+  })
+  socket.on("msg",(data)=>{
+    if(data!=name){
+      $('#status').html(data+" wants to play again");
+    }
+    
+  })
   socket.on('played', (r, c )=>{
         
         board[r][c]=  players[currentPlayer].tocken;
@@ -167,19 +179,21 @@ $(document).ready(function(){
         var result = getWinner();
         
         if(result){
+          $("td").prop("disabled",true);
           if(result=='d'){
             $('#status').html('Game Draw');
           }
           else if(name == players[currentPlayer].name){
             $('#status').html('Winner');
-            alert('Winner');
+            players[currentPlayer].won ++;
+            players[(currentPlayer+1)%2].lost ++;
           }
           else{
             $('#status').html('Looser');
-            alert('Looser');
           }
           
-          socket.emit('resetBoard', players, roomNo);
+          $("#playAgain").show();
+          
         }
         else{
           currentPlayer = (currentPlayer+1)%2;
@@ -195,10 +209,7 @@ $(document).ready(function(){
       
   })
       
-  socket.on('connectToRoom', (roomno)=>{
-       roomNo = roomno;
-       
-  })
+  
   socket.on('play',function(data) {
       
       for(var i=0;i<3;i++){
@@ -207,15 +218,18 @@ $(document).ready(function(){
           $("#b"+i+j).html("");
         }
       }
-         
+      $("td").prop("disabled",false);   
       document.getElementById('startOlay').style.width = '0%';
       //console.log(data.users[socket.io.engine.id]);
       console.log(data);
-      players=[{name: data[0], tocken: 'X'},{name: data[1], tocken: 'O'}];
+      players=data;
       currentPlayer = 0;
-      $('#p1').text(data[0]);
-      $('#p2').text(data[1]) ;
-      
+      $('#p1').text(players[0].name);
+      $('#p2').text(players[1].name) ;
+      $('#one_won').html(players[0].won);
+      $('#one_lost').html(players[0].lost);
+      $('#two_won').html(players[1].won);
+      $('#two_lost').html(players[1].lost);
       if(name == players[currentPlayer].name){
         $('#status').html('your turn');
       }
